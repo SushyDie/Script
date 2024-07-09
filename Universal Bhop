@@ -1,0 +1,839 @@
+local player = game.Players.LocalPlayer;
+local gui = player:FindFirstChild("PlayerGui"):FindFirstChild("BhopGui");
+if gui then
+	gui:Destroy();
+end
+local G2L = {};
+local bhop = false;
+local OutputValue = 0.8;
+local Force = OutputValue / 10;
+G2L["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+G2L["1"]['Name'] = [[BhopGui]];
+G2L["1"]['ZIndexBehavior'] = Enum.ZIndexBehavior.Sibling;
+G2L["1"]['ResetOnSpawn'] = false;
+G2L["2"] = Instance.new("Frame", G2L["1"]);
+G2L["2"]['BorderSizePixel'] = 0;
+G2L["2"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["2"]['Size'] = UDim2.new(0, 202, 0, 100);
+G2L["2"]['Position'] = UDim2.new(0, 0, 1, -98);
+G2L["2"]['BorderColor3'] = Color3.fromRGB(0, 0, 0);
+G2L["2"]['Name'] = [[Main]];
+G2L["2"]['BackgroundTransparency'] = 1;
+G2L["3"] = Instance.new("ImageLabel", G2L["2"]);
+G2L["3"]['BorderSizePixel'] = 0;
+G2L["3"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["3"]['Image'] = [[rbxassetid://18366630408]];
+G2L["3"]['Size'] = UDim2.new(0, 241, 0, 94);
+G2L["3"]['BorderColor3'] = Color3.fromRGB(0, 0, 0);
+G2L["3"]['BackgroundTransparency'] = 1;
+G2L["3"]['Name'] = [[BG]];
+G2L["3"]['Position'] = UDim2.new(0, 0, 0.88168, -83);
+G2L["4"] = Instance.new("TextLabel", G2L["2"]);
+G2L["4"]['Active'] = true;
+G2L["4"]['BorderSizePixel'] = 0;
+G2L["4"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["4"]['TextSize'] = 13;
+G2L["4"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["4"]['TextColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["4"]['BackgroundTransparency'] = 1;
+G2L["4"]['Size'] = UDim2.new(0, 165, 0, 157);
+G2L["4"]['BorderColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["4"]['Text'] = [[Universal Bhop - Disable]];
+G2L["4"]['Name'] = [[UniversalBhop]];
+G2L["4"]['Position'] = UDim2.new(0, 0, -0.1, -47);
+G2L["5"] = Instance.new("TextLabel", G2L["2"]);
+G2L["5"]['Active'] = true;
+G2L["5"]['BorderSizePixel'] = 0;
+G2L["5"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["5"]['TextSize'] = 13;
+G2L["5"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["5"]['TextColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["5"]['BackgroundTransparency'] = 1;
+G2L["5"]['Size'] = UDim2.new(0, 108, 0, 101);
+G2L["5"]['BorderColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["5"]['Text'] = [[Speed:]];
+G2L["5"]['Name'] = [[Speed]];
+G2L["5"]['Position'] = UDim2.new(0, 0, 0.45846, -47);
+G2L["6"] = Instance.new("TextLabel", G2L["2"]);
+G2L["6"]['Active'] = true;
+G2L["6"]['BorderSizePixel'] = 0;
+G2L["6"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["6"]['TextSize'] = 13;
+G2L["6"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["6"]['TextColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["6"]['BackgroundTransparency'] = 1;
+G2L["6"]['Size'] = UDim2.new(0, 108, 0, 45);
+G2L["6"]['BorderColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["6"]['Text'] = [[Timer:]];
+G2L["6"]['Name'] = [[Timer]];
+G2L["6"]['Position'] = UDim2.new(0, 0, 1.01691, -47);
+G2L["7"] = Instance.new("ImageLabel", G2L["2"]);
+G2L["7"]['ZIndex'] = 2;
+G2L["7"]['BorderSizePixel'] = 0;
+G2L["7"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["7"]['Image'] = [[rbxassetid://17251150526]];
+G2L["7"]['Size'] = UDim2.new(0, 24, 0, 24);
+G2L["7"]['BorderColor3'] = Color3.fromRGB(0, 0, 0);
+G2L["7"]['BackgroundTransparency'] = 1;
+G2L["7"]['Name'] = [[Setting]];
+G2L["7"]['Position'] = UDim2.new(0.03465, 0, 0.64441, 0);
+G2L["8"] = Instance.new("ImageLabel", G2L["2"]);
+G2L["8"]['ZIndex'] = 2;
+G2L["8"]['BorderSizePixel'] = 0;
+G2L["8"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["8"]['Image'] = [[rbxassetid://18367174264]];
+G2L["8"]['Size'] = UDim2.new(0, 24, 0, 24);
+G2L["8"]['BorderColor3'] = Color3.fromRGB(0, 0, 0);
+G2L["8"]['BackgroundTransparency'] = 1;
+G2L["8"]['Name'] = [[Info]];
+G2L["8"]['Position'] = UDim2.new(0.03465, 0, 0.36441, 0);
+G2L["9"] = Instance.new("TextLabel", G2L["2"]);
+G2L["9"]['Active'] = true;
+G2L["9"]['BorderSizePixel'] = 0;
+G2L["9"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["9"]['TextSize'] = 13;
+G2L["9"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["9"]['TextColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["9"]['BackgroundTransparency'] = 1;
+G2L["9"]['Size'] = UDim2.new(0, 227, 0, 45);
+G2L["9"]['BorderColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["9"]['Text'] = [[Comming Soon]];
+G2L["9"]['Name'] = [[Chrono]];
+G2L["9"]['Position'] = UDim2.new(0, 0, 1.01691, -47);
+G2L['a'] = Instance.new("TextLabel", G2L["2"]);
+G2L['a']['Active'] = true;
+G2L['a']['BorderSizePixel'] = 0;
+G2L['a']['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L['a']['TextSize'] = 13;
+G2L['a']['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L['a']['TextColor3'] = Color3.fromRGB(255, 255, 255);
+G2L['a']['BackgroundTransparency'] = 1;
+G2L['a']['Size'] = UDim2.new(0, 227, 0, 100);
+G2L['a']['BorderColor3'] = Color3.fromRGB(255, 255, 255);
+G2L['a']['Text'] = [[Comming Soon]];
+G2L['a']['Name'] = [[Speedo]];
+G2L['a']['Position'] = UDim2.new(0, 0, 0.45846, -47);
+G2L['b'] = Instance.new("UIAspectRatioConstraint", G2L["2"]);
+G2L['b']['AspectRatio'] = 2.02;
+G2L['c'] = Instance.new("TextButton", G2L["2"]);
+G2L['c']['BorderSizePixel'] = 0;
+G2L['c']['TextSize'] = 14;
+G2L['c']['TextColor3'] = Color3.fromRGB(0, 0, 0);
+G2L['c']['BackgroundColor3'] = Color3.fromRGB(25, 25, 25);
+G2L['c']['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L['c']['Size'] = UDim2.new(0, 23, 0, 23);
+G2L['c']['BackgroundTransparency'] = 0.75;
+G2L['c']['Name'] = [[InfoButton]];
+G2L['c']['BorderColor3'] = Color3.fromRGB(0, 0, 0);
+G2L['c']['Text'] = [[]];
+G2L['c']['Position'] = UDim2.new(0.03465, 1, 0.36441, 0);
+G2L['d'] = Instance.new("UICorner", G2L['c']);
+G2L['d']['CornerRadius'] = UDim.new(0.15, 0);
+G2L['e'] = Instance.new("TextButton", G2L["2"]);
+G2L['e']['BorderSizePixel'] = 0;
+G2L['e']['TextSize'] = 14;
+G2L['e']['TextColor3'] = Color3.fromRGB(0, 0, 0);
+G2L['e']['BackgroundColor3'] = Color3.fromRGB(25, 25, 25);
+G2L['e']['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L['e']['Size'] = UDim2.new(0, 23, 0, 23);
+G2L['e']['BackgroundTransparency'] = 0.75;
+G2L['e']['Name'] = [[SettingButton]];
+G2L['e']['BorderColor3'] = Color3.fromRGB(0, 0, 0);
+G2L['e']['Text'] = [[]];
+G2L['e']['Position'] = UDim2.new(0.03465, 1, 0.36441, 28);
+G2L['f'] = Instance.new("UICorner", G2L['e']);
+G2L['f']['CornerRadius'] = UDim.new(0.075, 0);
+G2L["10"] = Instance.new("Frame", G2L["1"]);
+G2L["10"]['BorderSizePixel'] = 5;
+G2L["10"]['BackgroundColor3'] = Color3.fromRGB(56, 56, 56);
+G2L["10"]['Size'] = UDim2.new(0, 165, 0, 211);
+G2L["10"]['Position'] = UDim2.new(-1.1, 0, 1.014, -355);
+G2L["10"]['BorderColor3'] = Color3.fromRGB(39, 39, 39);
+G2L["10"]['Name'] = [[Info]];
+G2L["11"] = Instance.new("UIAspectRatioConstraint", G2L["10"]);
+G2L["11"]['AspectRatio'] = 0.80095;
+G2L["12"] = Instance.new("ScrollingFrame", G2L["10"]);
+G2L["12"]['Active'] = true;
+G2L["12"]['BorderSizePixel'] = 0;
+G2L["12"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["12"]['Size'] = UDim2.new(0, 165, 0, 178);
+G2L["12"]['ScrollBarImageColor3'] = Color3.fromRGB(0, 0, 0);
+G2L["12"]['Position'] = UDim2.new(0, 0, 0.13592, 0);
+G2L["12"]['BorderColor3'] = Color3.fromRGB(0, 0, 0);
+G2L["12"]['BackgroundTransparency'] = 1;
+G2L["13"] = Instance.new("TextBox", G2L["12"]);
+G2L["13"]['Interactable'] = false;
+G2L["13"]['TextColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["13"]['BorderSizePixel'] = 0;
+G2L["13"]['TextXAlignment'] = Enum.TextXAlignment.Left;
+G2L["13"]['TextWrapped'] = true;
+G2L["13"]['TextSize'] = 14;
+G2L["13"]['TextYAlignment'] = Enum.TextYAlignment.Top;
+G2L["13"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["13"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["13"]['RichText'] = true;
+G2L["13"]['MultiLine'] = true;
+G2L["13"]['Size'] = UDim2.new(0, 150, 0, 412);
+G2L["13"]['BorderColor3'] = Color3.fromRGB(0, 0, 0);
+G2L["13"]['Text'] = [[Bhop in your favorite games is now possible! You can change the speed and much more in the settings.
+
+<b>[TUTORIAL]</b>
+<b>-</b>Hold Space while strafing (turning your cam to the right if you press D and left if you press A.)
+
+<b>-</b>You <font color="rgb(0,255,25)">gain speed</font> while strafing
+
+<b>-</b>You <font color="rgb(255,17,0)">lose speed</font> when grounded or press S
+
+<b>-</b>Watch a YT video for more
+
+<b>[ABOUT]</b>
+
+<b>-</b> Version: V1
+<b>-</b> Updated: 07/07/24
+<b>-</b> Server Discord: None
+<b>-</b> Expect bugs, but also updates and more stuff
+
+<b>[Credit]</b>
+<b>-</b> SushyDie
+
+
+]];
+G2L["13"]['BackgroundTransparency'] = 1;
+G2L["14"] = Instance.new("TextLabel", G2L["10"]);
+G2L["14"]['Active'] = true;
+G2L["14"]['BorderSizePixel'] = 0;
+G2L["14"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["14"]['TextSize'] = 17;
+G2L["14"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+G2L["14"]['TextColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["14"]['BackgroundTransparency'] = 1;
+G2L["14"]['Size'] = UDim2.new(0, 165, 0, 27);
+G2L["14"]['BorderColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["14"]['Text'] = [[Information]];
+G2L["14"]['Name'] = [[Information]];
+G2L["14"]['Position'] = UDim2.new(0, 0, 0.22815, -47);
+G2L["15"] = Instance.new("TextButton", G2L["10"]);
+G2L["15"]['BorderSizePixel'] = 0;
+G2L["15"]['TextSize'] = 14;
+G2L["15"]['TextColor3'] = Color3.fromRGB(0, 0, 0);
+G2L["15"]['BackgroundColor3'] = Color3.fromRGB(28, 28, 28);
+G2L["15"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["15"]['Size'] = UDim2.new(0, 20, 0, 4);
+G2L["15"]['Name'] = [[Close]];
+G2L["15"]['BorderColor3'] = Color3.fromRGB(166, 0, 0);
+G2L["15"]['Text'] = [[]];
+G2L["15"]['Visible'] = false;
+G2L["15"]['Position'] = UDim2.new(0.82352, 1, 0.06748, -1);
+G2L["16"] = Instance.new("UICorner", G2L["10"]);
+G2L["16"]['CornerRadius'] = UDim.new(0.03, 0);
+G2L["17"] = Instance.new("UIStroke", G2L["10"]);
+G2L["17"]['Thickness'] = 3;
+G2L["17"]['Color'] = Color3.fromRGB(39, 39, 39);
+G2L["18"] = Instance.new("LocalScript", G2L["1"]);
+G2L["18"]['Name'] = [[Guicontroller]];
+G2L["19"] = Instance.new("Frame", G2L["1"]);
+G2L["19"]['BorderSizePixel'] = 5;
+G2L["19"]['BackgroundColor3'] = Color3.fromRGB(56, 56, 56);
+G2L["19"]['Size'] = UDim2.new(0, 165, 0, 211);
+G2L["19"]['Position'] = UDim2.new(0, 0, 1.014, -355);
+G2L["19"]['BorderColor3'] = Color3.fromRGB(39, 39, 39);
+G2L["19"]['Name'] = [[Settings]];
+G2L["1a"] = Instance.new("UICorner", G2L["19"]);
+G2L["1a"]['CornerRadius'] = UDim.new(0.03, 0);
+G2L["1b"] = Instance.new("UIAspectRatioConstraint", G2L["19"]);
+G2L["1b"]['AspectRatio'] = 0.80095;
+G2L["1c"] = Instance.new("UIStroke", G2L["19"]);
+G2L["1c"]['Thickness'] = 3;
+G2L["1c"]['Color'] = Color3.fromRGB(39, 39, 39);
+G2L["1d"] = Instance.new("ScrollingFrame", G2L["19"]);
+G2L["1d"]['Active'] = true;
+G2L["1d"]['BorderSizePixel'] = 0;
+G2L["1d"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["1d"]['Size'] = UDim2.new(0, 165, 0, 180);
+G2L["1d"]['ScrollBarImageColor3'] = Color3.fromRGB(0, 0, 0);
+G2L["1d"]['Position'] = UDim2.new(0, 0, 0.12145, 0);
+G2L["1d"]['BorderColor3'] = Color3.fromRGB(0, 0, 0);
+G2L["1d"]['BackgroundTransparency'] = 1;
+G2L["1e"] = Instance.new("Frame", G2L["1d"]);
+G2L["1e"]['BorderSizePixel'] = 2;
+G2L["1e"]['BackgroundColor3'] = Color3.fromRGB(56, 56, 56);
+G2L["1e"]['Size'] = UDim2.new(0, 135, 0, 62);
+G2L["1e"]['Position'] = UDim2.new(0.04848, 0, 0.0243, 0);
+G2L["1e"]['BorderColor3'] = Color3.fromRGB(39, 39, 39);
+G2L["1e"]['Name'] = [[Bhop]];
+G2L["1f"] = Instance.new("TextButton", G2L["1e"]);
+G2L["1f"]['BorderSizePixel'] = 4;
+G2L["1f"]['TextSize'] = 14;
+G2L["1f"]['TextColor3'] = Color3.fromRGB(0, 0, 0);
+G2L["1f"]['BackgroundColor3'] = Color3.fromRGB(56, 56, 56);
+G2L["1f"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["1f"]['Size'] = UDim2.new(0, 16, 0, 16);
+G2L["1f"]['Name'] = [[BCheckBox]];
+G2L["1f"]['BorderColor3'] = Color3.fromRGB(39, 39, 39);
+G2L["1f"]['Text'] = [[]];
+G2L["1f"]['Position'] = UDim2.new(0.19154, -1, 0.43657, 0);
+G2L["20"] = Instance.new("TextButton", G2L["1e"]);
+G2L["20"]['TextWrapped'] = true;
+G2L["20"]['BorderSizePixel'] = 2;
+G2L["20"]['TextSize'] = 14;
+G2L["20"]['TextColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["20"]['TextScaled'] = true;
+G2L["20"]['BackgroundColor3'] = Color3.fromRGB(56, 56, 56);
+G2L["20"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+G2L["20"]['Size'] = UDim2.new(0, 58, 0, 20);
+G2L["20"]['Name'] = [[BCheckBox2]];
+G2L["20"]['BorderColor3'] = Color3.fromRGB(39, 39, 39);
+G2L["20"]['Text'] = [[B]];
+G2L["20"]['Position'] = UDim2.new(0.51266, -5, 0.37847, 1);
+G2L["21"] = Instance.new("TextLabel", G2L["1e"]);
+G2L["21"]['Active'] = true;
+G2L["21"]['BorderSizePixel'] = 0;
+G2L["21"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["21"]['TextSize'] = 13;
+G2L["21"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+G2L["21"]['TextColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["21"]['BackgroundTransparency'] = 1;
+G2L["21"]['Size'] = UDim2.new(0, 134, 0, 21);
+G2L["21"]['BorderColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["21"]['Text'] = [[Activate Bhop]];
+G2L["21"]['Name'] = [[Bhop]];
+G2L["21"]['Position'] = UDim2.new(0, 0, 0.74226, -47);
+G2L["22"] = Instance.new("Frame", G2L["1d"]);
+G2L["22"]['BorderSizePixel'] = 2;
+G2L["22"]['BackgroundColor3'] = Color3.fromRGB(56, 56, 56);
+G2L["22"]['Size'] = UDim2.new(0, 135, 0, 62);
+G2L["22"]['Position'] = UDim2.new(0.04848, 0, 0.52914, -140);
+G2L["22"]['BorderColor3'] = Color3.fromRGB(39, 39, 39);
+G2L["22"]['Name'] = [[Movement]];
+G2L["23"] = Instance.new("TextLabel", G2L["22"]);
+G2L["23"]['Active'] = true;
+G2L["23"]['BorderSizePixel'] = 0;
+G2L["23"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["23"]['TextSize'] = 13;
+G2L["23"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+G2L["23"]['TextColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["23"]['BackgroundTransparency'] = 1;
+G2L["23"]['Size'] = UDim2.new(0, 47, 0, -35);
+G2L["23"]['BorderColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["23"]['Text'] = [[Force]];
+G2L["23"]['Name'] = [[Force]];
+G2L["23"]['Position'] = UDim2.new(0.12871, 26, 0.89975, -31);
+G2L["24"] = Instance.new("TextBox", G2L["22"]);
+G2L["24"]['TextColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["24"]['BorderSizePixel'] = 2;
+G2L["24"]['TextWrapped'] = true;
+G2L["24"]['TextSize'] = 13;
+G2L["24"]['Name'] = [[MTextBox]];
+G2L["24"]['BackgroundColor3'] = Color3.fromRGB(56, 56, 56);
+G2L["24"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["24"]['Size'] = UDim2.new(0, 34, 0, 20);
+G2L["24"]['Position'] = UDim2.new(0, 95, 0, 22);
+G2L["24"]['BorderColor3'] = Color3.fromRGB(39, 39, 39);
+G2L["24"]['Text'] = [[0.8]];
+G2L["25"] = Instance.new("TextLabel", G2L["22"]);
+G2L["25"]['Active'] = true;
+G2L["25"]['BorderSizePixel'] = 0;
+G2L["25"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["25"]['TextSize'] = 13;
+G2L["25"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+G2L["25"]['TextColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["25"]['BackgroundTransparency'] = 1;
+G2L["25"]['Size'] = UDim2.new(0, 47, 0, -35);
+G2L["25"]['BorderColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["25"]['Text'] = [[Normal]];
+G2L["25"]['Name'] = [[Comment]];
+G2L["25"]['Position'] = UDim2.new(0.12871, 26, 0.89975, 14);
+G2L["26"] = Instance.new("CanvasGroup", G2L["22"]);
+G2L["26"]['BorderSizePixel'] = 0;
+G2L["26"]['BackgroundColor3'] = Color3.fromRGB(56, 56, 56);
+G2L["26"]['Size'] = UDim2.new(0, 77, 0, 15);
+G2L["26"]['Position'] = UDim2.new(0.365, -41, 0.205, 12);
+G2L["26"]['BorderColor3'] = Color3.fromRGB(0, 0, 0);
+G2L["27"] = Instance.new("UICorner", G2L["26"]);
+G2L["27"]['CornerRadius'] = UDim.new(0.25, 0);
+G2L["28"] = Instance.new("UIStroke", G2L["26"]);
+G2L["28"]['Thickness'] = 2;
+G2L["28"]['Color'] = Color3.fromRGB(39, 39, 39);
+G2L["29"] = Instance.new("Frame", G2L["26"]);
+G2L["29"]['BorderSizePixel'] = 0;
+G2L["29"]['BackgroundColor3'] = Color3.fromRGB(39, 39, 39);
+G2L["29"]['Size'] = UDim2.new(1, 0, 1, 0);
+G2L["29"]['BorderColor3'] = Color3.fromRGB(0, 0, 0);
+G2L["29"]['Name'] = [[Fill]];
+G2L["2a"] = Instance.new("TextButton", G2L["26"]);
+G2L["2a"]['BorderSizePixel'] = 0;
+G2L["2a"]['TextSize'] = 14;
+G2L["2a"]['TextColor3'] = Color3.fromRGB(0, 0, 0);
+G2L["2a"]['BackgroundColor3'] = Color3.fromRGB(43, 93, 255);
+G2L["2a"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["2a"]['ZIndex'] = 5;
+G2L["2a"]['Size'] = UDim2.new(1, 0, 1, 0);
+G2L["2a"]['BackgroundTransparency'] = 1;
+G2L["2a"]['Name'] = [[Trigger]];
+G2L["2a"]['BorderColor3'] = Color3.fromRGB(0, 0, 0);
+G2L["2a"]['Text'] = [[]];
+G2L["2b"] = Instance.new("TextLabel", G2L["1d"]);
+G2L["2b"]['Active'] = true;
+G2L["2b"]['BorderSizePixel'] = 0;
+G2L["2b"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["2b"]['TextSize'] = 14;
+G2L["2b"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+G2L["2b"]['TextColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["2b"]['BackgroundTransparency'] = 1;
+G2L["2b"]['Size'] = UDim2.new(0, 165, 0, 27);
+G2L["2b"]['BorderColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["2b"]['Text'] = [[new features later]];
+G2L["2b"]['Name'] = [[More...]];
+G2L["2b"]['Position'] = UDim2.new(0, 0, 0.22815, 203);
+G2L["2c"] = Instance.new("Frame", G2L["1d"]);
+G2L["2c"]['BorderSizePixel'] = 2;
+G2L["2c"]['BackgroundColor3'] = Color3.fromRGB(56, 56, 56);
+G2L["2c"]['Size'] = UDim2.new(0, 135, 0, 62);
+G2L["2c"]['Position'] = UDim2.new(0.04848, 0, 0.0243, 136);
+G2L["2c"]['BorderColor3'] = Color3.fromRGB(39, 39, 39);
+G2L["2c"]['Name'] = [[UI]];
+G2L["2d"] = Instance.new("TextButton", G2L["2c"]);
+G2L["2d"]['BorderSizePixel'] = 2;
+G2L["2d"]['TextSize'] = 14;
+G2L["2d"]['TextColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["2d"]['BackgroundColor3'] = Color3.fromRGB(56, 56, 56);
+G2L["2d"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+G2L["2d"]['Size'] = UDim2.new(0, 93, 0, 20);
+G2L["2d"]['Name'] = [[UIhkey]];
+G2L["2d"]['BorderColor3'] = Color3.fromRGB(39, 39, 39);
+G2L["2d"]['Text'] = [[Right Shift]];
+G2L["2d"]['Position'] = UDim2.new(0.20741, -5, 0.37847, 1);
+G2L["2e"] = Instance.new("TextLabel", G2L["2c"]);
+G2L["2e"]['Active'] = true;
+G2L["2e"]['BorderSizePixel'] = 0;
+G2L["2e"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["2e"]['TextSize'] = 13;
+G2L["2e"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+G2L["2e"]['TextColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["2e"]['BackgroundTransparency'] = 1;
+G2L["2e"]['Size'] = UDim2.new(0, 134, 0, 21);
+G2L["2e"]['BorderColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["2e"]['Text'] = [[Open/Close UI]];
+G2L["2e"]['Name'] = [[Open/Close UI]];
+G2L["2e"]['Position'] = UDim2.new(0, 0, 0.74226, -47);
+G2L["2f"] = Instance.new("Frame", G2L["1d"]);
+G2L["2f"]['BorderSizePixel'] = 2;
+G2L["2f"]['BackgroundColor3'] = Color3.fromRGB(56, 56, 56);
+G2L["2f"]['Size'] = UDim2.new(0, 135, 0, 62);
+G2L["2f"]['Position'] = UDim2.new(0.04848, 0, 0.0243, 330);
+G2L["2f"]['BorderColor3'] = Color3.fromRGB(39, 39, 39);
+G2L["2f"]['Name'] = [[DeleteGUI]];
+G2L["30"] = Instance.new("TextButton", G2L["2f"]);
+G2L["30"]['BorderSizePixel'] = 2;
+G2L["30"]['TextSize'] = 14;
+G2L["30"]['TextColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["30"]['BackgroundColor3'] = Color3.fromRGB(56, 56, 56);
+G2L["30"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+G2L["30"]['Size'] = UDim2.new(0, 93, 0, 20);
+G2L["30"]['Name'] = [[Delete]];
+G2L["30"]['BorderColor3'] = Color3.fromRGB(39, 39, 39);
+G2L["30"]['Text'] = [[Delete]];
+G2L["30"]['Position'] = UDim2.new(0.20741, -5, 0.37847, 1);
+G2L["31"] = Instance.new("TextLabel", G2L["2f"]);
+G2L["31"]['Active'] = true;
+G2L["31"]['BorderSizePixel'] = 0;
+G2L["31"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["31"]['TextSize'] = 13;
+G2L["31"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+G2L["31"]['TextColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["31"]['BackgroundTransparency'] = 1;
+G2L["31"]['Size'] = UDim2.new(0, 134, 0, 21);
+G2L["31"]['BorderColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["31"]['Text'] = [[Destroy Bhop and GUI]];
+G2L["31"]['Name'] = [[DeleteGui]];
+G2L["31"]['Position'] = UDim2.new(0, 0, 0.74226, -47);
+G2L["32"] = Instance.new("TextButton", G2L["19"]);
+G2L["32"]['BorderSizePixel'] = 0;
+G2L["32"]['TextSize'] = 14;
+G2L["32"]['TextColor3'] = Color3.fromRGB(0, 0, 0);
+G2L["32"]['BackgroundColor3'] = Color3.fromRGB(28, 28, 28);
+G2L["32"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["32"]['Size'] = UDim2.new(0, 20, 0, 4);
+G2L["32"]['Name'] = [[Close]];
+G2L["32"]['BorderColor3'] = Color3.fromRGB(166, 0, 0);
+G2L["32"]['Text'] = [[]];
+G2L["32"]['Visible'] = false;
+G2L["32"]['Position'] = UDim2.new(0.82352, 1, 0.06748, -1);
+G2L["33"] = Instance.new("TextLabel", G2L["19"]);
+G2L["33"]['Active'] = true;
+G2L["33"]['BorderSizePixel'] = 0;
+G2L["33"]['BackgroundColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["33"]['TextSize'] = 17;
+G2L["33"]['FontFace'] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+G2L["33"]['TextColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["33"]['BackgroundTransparency'] = 1;
+G2L["33"]['Size'] = UDim2.new(0, 165, 0, 27);
+G2L["33"]['BorderColor3'] = Color3.fromRGB(255, 255, 255);
+G2L["33"]['Text'] = [[Settings]];
+G2L["33"]['Name'] = [[Settings]];
+G2L["33"]['Position'] = UDim2.new(0, 0, 0.22815, -47);
+local function C_18()
+	local script = G2L["18"];
+	local TweenService = game:GetService("TweenService");
+	local GuiController = script.Parent;
+	local InfoFrame = GuiController:WaitForChild("Info");
+	local SettingsFrame = GuiController:WaitForChild("Settings");
+	local MainFrame = GuiController:WaitForChild("Main");
+	local InfoButton = MainFrame:WaitForChild("InfoButton");
+	local SettingButton = MainFrame:WaitForChild("SettingButton");
+	local OffscreenPosition = UDim2.new(-1.1, 0, 1.014, -355);
+	local VisiblePosition = UDim2.new(0, 0, 1.014, -355);
+	local TweenDuration = 0.5;
+	local EasingStyle = Enum.EasingStyle.Exponential;
+	local EasingDirection = Enum.EasingDirection.Out;
+	InfoFrame.Position = OffscreenPosition;
+	SettingsFrame.Position = OffscreenPosition;
+	local function ToggleFrame(frame, targetPosition)
+		local currentPosition = frame.Position;
+		local isOffscreen = currentPosition == OffscreenPosition;
+		local target = (isOffscreen and VisiblePosition) or OffscreenPosition;
+		local tweenInfo = TweenInfo.new(TweenDuration, EasingStyle, EasingDirection);
+		local tween = TweenService:Create(frame, tweenInfo, {Position=target});
+		tween:Play();
+	end
+	local function TweenFrameToOffscreen(frame)
+		local tweenInfo = TweenInfo.new(TweenDuration, EasingStyle, EasingDirection);
+		local tween = TweenService:Create(frame, tweenInfo, {Position=OffscreenPosition});
+		tween:Play();
+	end
+	InfoButton.Activated:Connect(function()
+		if (SettingsFrame.Position == VisiblePosition) then
+			TweenFrameToOffscreen(SettingsFrame);
+		end
+		ToggleFrame(InfoFrame, VisiblePosition);
+	end);
+	SettingButton.Activated:Connect(function()
+		if (InfoFrame.Position == VisiblePosition) then
+			TweenFrameToOffscreen(InfoFrame);
+		end
+		ToggleFrame(SettingsFrame, VisiblePosition);
+	end);
+	local BCheckBox = script.Parent.Settings.ScrollingFrame.Bhop.BCheckBox;
+	local OriginalColor = Color3.fromRGB(55, 55, 55);
+	local ActiveColor = Color3.fromRGB(31, 200, 1);
+	BCheckBox.BackgroundColor3 = OriginalColor;
+	local function ToggleBhop()
+		bhop = not bhop;
+		BCheckBox.BackgroundColor3 = (bhop and ActiveColor) or OriginalColor;
+		local bhopText = (bhop and "Universal Bhop - Enable") or "Universal Bhop - Disable";
+		script.Parent.Main.UniversalBhop.Text = bhopText;
+	end
+	BCheckBox.Activated:Connect(ToggleBhop);
+	local UIhkey = script.Parent.Settings.ScrollingFrame.UI.UIhkey;
+	local BCheckBox2 = script.Parent.Settings.ScrollingFrame.Bhop.BCheckBox2;
+	local BhopGui = script.Parent.Parent.BhopGui;
+	local hotkey1 = Enum.KeyCode.RightShift;
+	local hotkey2 = Enum.KeyCode.B;
+	local assigningHotkey1 = false;
+	local assigningHotkey2 = false;
+	local hotkeyPressed1 = false;
+	local hotkeyPressed2 = false;
+	local function WaitForHotkey1()
+		UIhkey.Text = "...";
+		assigningHotkey1 = true;
+		local input = game:GetService("UserInputService").InputBegan:Wait();
+		if (input.UserInputType == Enum.UserInputType.Keyboard) then
+			if assigningHotkey1 then
+				hotkey1 = input.KeyCode;
+				UIhkey.Text = hotkey1.Name;
+				assigningHotkey1 = false;
+			end
+		end
+	end
+	local function WaitForHotkey2()
+		BCheckBox2.Text = "...";
+		assigningHotkey2 = true;
+		local input = game:GetService("UserInputService").InputBegan:Wait();
+		if (input.UserInputType == Enum.UserInputType.Keyboard) then
+			if assigningHotkey2 then
+				hotkey2 = input.KeyCode;
+				BCheckBox2.Text = hotkey2.Name;
+				assigningHotkey2 = false;
+			end
+		end
+	end
+	local function CheckHotkey1()
+		if (hotkey1 and game:GetService("UserInputService"):IsKeyDown(hotkey1)) then
+			if not hotkeyPressed1 then
+				BhopGui.Enabled = not BhopGui.Enabled;
+				hotkeyPressed1 = true;
+			end
+		else
+			hotkeyPressed1 = false;
+		end
+	end
+	local function CheckHotkey2()
+		if (hotkey2 and game:GetService("UserInputService"):IsKeyDown(hotkey2)) then
+			if not hotkeyPressed2 then
+				ToggleBhop();
+				hotkeyPressed2 = true;
+			end
+		else
+			hotkeyPressed2 = false;
+		end
+	end
+	UIhkey.Activated:Connect(WaitForHotkey1);
+	BCheckBox2.Activated:Connect(WaitForHotkey2);
+	game:GetService("RunService").RenderStepped:Connect(function()
+		CheckHotkey1();
+		CheckHotkey2();
+	end);
+	local Player = game.Players.LocalPlayer;
+	local UserInputService = game:GetService("UserInputService");
+	local BhopGui = script.Parent;
+	local Slider = BhopGui.Settings.ScrollingFrame.Movement.CanvasGroup;
+	local Fill = Slider.Fill;
+	local Trigger = Slider.Trigger;
+	local OutputValue = Slider.Parent.MTextBox;
+	local Comment = Slider.Parent.Comment;
+	local SliderActive = false;
+	local MIN_VALUE = 0;
+	local MAX_VALUE = 10;
+	local ALPHA = 0.8;
+	local function setFillSize(value)
+		local scaledValue = (value - MIN_VALUE) / (MAX_VALUE - MIN_VALUE);
+		Fill.Size = UDim2.fromScale(scaledValue, 1);
+		OutputValue.Text = string.format("%.2f", value);
+	end
+	local function exponentialEase(current, target, alpha)
+		return current + ((target - current) * (alpha ^ 2));
+	end
+	local function UpdateSlider()
+		local mousePosition = UserInputService:GetMouseLocation().X;
+		local sliderPosition = Slider.AbsolutePosition.X;
+		local sliderSize = Slider.AbsoluteSize.X;
+		local relativePosition = (mousePosition - sliderPosition) / sliderSize;
+		relativePosition = math.clamp(relativePosition, 0, 1);
+		local newValue = MIN_VALUE + (relativePosition * (MAX_VALUE - MIN_VALUE));
+		OutputValue.Text = string.format("%.2f", newValue);
+		local currentFillSize = Fill.Size.X.Scale;
+		local targetFillSize = relativePosition;
+		local newFillSize = exponentialEase(currentFillSize, targetFillSize, ALPHA);
+		Fill.Size = UDim2.fromScale(newFillSize, 1);
+	end
+	local function ActivateSlider()
+		SliderActive = true;
+		while SliderActive do
+			UpdateSlider();
+			task.wait(0.03);
+		end
+	end
+	Trigger.MouseButton1Down:Connect(ActivateSlider);
+	UserInputService.InputEnded:Connect(function(input)
+		if ((input.UserInputType == Enum.UserInputType.MouseButton1) or (input.UserInputType == Enum.UserInputType.Touch)) then
+			SliderActive = false;
+		end
+	end);
+	local function UpdateFromTextBox()
+		local textBoxValue = tonumber(OutputValue.Text) or MIN_VALUE;
+		textBoxValue = math.clamp(textBoxValue, MIN_VALUE, MAX_VALUE);
+		local relativePosition = (textBoxValue - MIN_VALUE) / (MAX_VALUE - MIN_VALUE);
+		local currentFillSize = Fill.Size.X.Scale;
+		local newFillSize = exponentialEase(currentFillSize, relativePosition, ALPHA);
+		Fill.Size = UDim2.fromScale(newFillSize, 1);
+		local commentText = "";
+		if ((textBoxValue >= 0.01) and (textBoxValue < 0.7)) then
+			commentText = "Low";
+		elseif (textBoxValue == 0) then
+			commentText = "you can't move with this";
+		elseif ((textBoxValue >= 0.7) and (textBoxValue < 1.2)) then
+			commentText = "Normal";
+		elseif ((textBoxValue >= 1.2) and (textBoxValue < 2)) then
+			commentText = "Normal +";
+		elseif ((textBoxValue >= 2) and (textBoxValue < 3)) then
+			commentText = "Normal ++";
+		elseif ((textBoxValue >= 3) and (textBoxValue < 4)) then
+			commentText = "Fast";
+		elseif ((textBoxValue >= 4) and (textBoxValue < 5)) then
+			commentText = "Fast +";
+		elseif ((textBoxValue >= 5) and (textBoxValue < 6)) then
+			commentText = "Fast ++";
+		elseif ((textBoxValue >= 6) and (textBoxValue < 7)) then
+			commentText = "Crazy";
+		elseif ((textBoxValue >= 7) and (textBoxValue < 8)) then
+			commentText = "Crazy +";
+		elseif ((textBoxValue >= 8) and (textBoxValue < 9)) then
+			commentText = "Crazy ++";
+		elseif ((textBoxValue >= 9) and (textBoxValue < 10)) then
+			commentText = "Hell";
+		elseif ((textBoxValue >= 10) and (textBoxValue < 100)) then
+			commentText = "Bruh";
+		elseif ((textBoxValue >= 100) and (textBoxValue < 1000)) then
+			commentText = "Why ?";
+		elseif (textBoxValue >= 1000) then
+			commentText = "Out of Control";
+		elseif ((textBoxValue >= -math.huge) and (textBoxValue < 0)) then
+			commentText = "What do you think it will do?";
+		end
+		Comment.Text = commentText;
+	end
+	UpdateFromTextBox();
+	OutputValue.FocusLost:Connect(UpdateFromTextBox);
+	OutputValue:GetPropertyChangedSignal("Text"):Connect(UpdateFromTextBox);
+	local BhopGui = script.Parent;
+	local CloseButton = BhopGui.Settings.ScrollingFrame.DeleteGUI.Delete;
+	if CloseButton then
+		local bhop = false;
+		CloseButton.MouseButton1Click:Connect(function()
+			BhopGui:Destroy();
+		end);
+	else
+	end
+end
+task.spawn(C_18);
+local Players = game:GetService("Players");
+local UserInputService = game:GetService("UserInputService");
+local camera = game.Workspace.CurrentCamera;
+local sensitivity = 0.0005;
+local checkInterval = 0.001;
+local lastOrientation = camera.CFrame.LookVector;
+local BodyVelocity = Instance.new("BodyVelocity");
+BodyVelocity.MaxForce = Vector3.new(5000, 0, 5000);
+local MINIMUM_VELOCITY = 0;
+local VELOCITY_MULTIPLIER = 1;
+local STANDING_STILL_SAFEGUARD = true;
+local WALK_SPEED_TRANSITION = true;
+local VELOCITY_DEGRADATION = 0;
+local VELOCITY_VALIDATOR_TICK = 1;
+local velocityIndex = 0;
+local jumpValueHolder = false;
+local proxy_walkspeed = 0;
+local stopThreads = false;
+local function hasOrientationChanged()
+	local currentOrientation = camera.CFrame.LookVector;
+	local dotProduct = currentOrientation:Dot(lastOrientation);
+	return math.acos(dotProduct) > sensitivity;
+end
+local function cameraMotionDetector()
+	while not stopThreads do
+		if hasOrientationChanged() then
+			if not jumpValueHolder then
+				velocityIndex = MINIMUM_VELOCITY;
+			else
+				velocityIndex = velocityIndex + Force;
+			end
+		end
+		lastOrientation = camera.CFrame.LookVector;
+		wait(checkInterval);
+	end
+end
+local jumpConnection;
+local function connectJumpRequest()
+	jumpConnection = UserInputService.JumpRequest:Connect(function()
+		local player = Players.LocalPlayer;
+		local character = player.Character;
+		local humanoid = character and character:FindFirstChildOfClass("Humanoid");
+		if (not humanoid or (humanoid.Health <= 0)) then
+			return;
+		end
+		if jumpValueHolder then
+			return;
+		end
+		if (STANDING_STILL_SAFEGUARD and (humanoid.MoveDirection == Vector3.new())) then
+			velocityIndex = MINIMUM_VELOCITY;
+			return;
+		end
+		BodyVelocity.Parent = humanoid.RootPart;
+		velocityIndex = velocityIndex + (VELOCITY_MULTIPLIER * 0);
+		jumpValueHolder = true;
+	end);
+end
+local function onStateChanged(humanoid)
+	humanoid.StateChanged:Connect(function(new, old)
+		if (new == Enum.HumanoidStateType.Landed) then
+			jumpValueHolder = false;
+			wait(VELOCITY_VALIDATOR_TICK);
+			if not jumpValueHolder then
+				velocityIndex = MINIMUM_VELOCITY;
+				BodyVelocity.Parent = nil;
+			end
+		end
+	end);
+end
+local function velocityDegradationThread()
+	while not stopThreads do
+		wait(1);
+		if ((velocityIndex - VELOCITY_DEGRADATION) >= MINIMUM_VELOCITY) then
+			velocityIndex = velocityIndex - VELOCITY_DEGRADATION;
+		end
+	end
+end
+local function updateVelocity()
+	while not stopThreads do
+		wait(0.0001);
+		local player = Players.LocalPlayer;
+		local character = player.Character;
+		local humanoid = character and character:FindFirstChildOfClass("Humanoid");
+		if not humanoid then
+			continue;
+		end
+		local rootPart = humanoid.RootPart;
+		if not rootPart then
+			continue;
+		end
+		local lookVector = rootPart.CFrame.LookVector;
+		if ((velocityIndex == MINIMUM_VELOCITY) or UserInputService:IsKeyDown(Enum.KeyCode.S)) then
+			BodyVelocity.Velocity = Vector3.new(0, 0, 0);
+			velocityIndex = MINIMUM_VELOCITY;
+			proxy_walkspeed = humanoid.WalkSpeed;
+		else
+			if WALK_SPEED_TRANSITION then
+				proxy_walkspeed = humanoid.WalkSpeed;
+			end
+			BodyVelocity.Velocity = lookVector * (velocityIndex + proxy_walkspeed);
+			local rayParams = RaycastParams.new();
+			rayParams.FilterType = Enum.RaycastFilterType.Exclude;
+			rayParams.FilterDescendantsInstances = {player.Character,game.Workspace.CurrentCamera};
+			local rayOrigin = rootPart.Position;
+			local rayDirection = lookVector * 2;
+			local rayResult = game.Workspace:Raycast(rayOrigin, rayDirection, rayParams);
+			if rayResult then
+				local hitPart = rayResult.Instance;
+				velocityIndex = MINIMUM_VELOCITY;
+				BodyVelocity.Parent = nil;
+			end
+		end
+	end
+end
+local coroutines = {};
+local function startBhop()
+	stopThreads = false;
+	table.insert(coroutines, coroutine.wrap(cameraMotionDetector));
+	table.insert(coroutines, coroutine.wrap(velocityDegradationThread));
+	table.insert(coroutines, coroutine.wrap(updateVelocity));
+	connectJumpRequest();
+	local player = Players.LocalPlayer;
+	local character = player.Character or player.CharacterAdded:Wait();
+	local humanoid = character:FindFirstChildOfClass("Humanoid") or character:WaitForChild("Humanoid");
+	onStateChanged(humanoid);
+	for _, co in ipairs(coroutines) do
+		co();
+	end
+end
+local function stopBhop()
+	stopThreads = true;
+	if jumpConnection then
+		jumpConnection:Disconnect();
+	end
+	BodyVelocity.Parent = nil;
+end
+local function monitorBhop()
+	while true do
+		wait(0.1);
+		if bhop then
+			if not coroutines[1] then
+				startBhop();
+			end
+		elseif coroutines[1] then
+			stopBhop();
+			coroutines = {};
+		end
+	end
+end
+coroutine.wrap(monitorBhop)();
+return G2L["1"], require;
